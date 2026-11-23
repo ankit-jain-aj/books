@@ -20,3 +20,8 @@ Static Astro 5 site, deployed to GitHub Pages via `.github/workflows/deploy.yml`
 - Wisdom content: no medical/therapy claims.
 - Use `url()` from `src/lib/utils.ts` for internal links (base path support).
 - Run: `npm run dev` (port 4321), `npm run build`.
+
+## Publishing
+- Repo: github.com/ankit-jain-aj/books (public). Live: https://ankit-jain-aj.github.io/books/
+- Every push to `main` rebuilds and publishes via GitHub Actions (~2 min). The workflow reads the address/base path from Pages settings, so a repo rename or custom domain needs no code change.
+- Ask the owner before committing/pushing (pushing publishes). Commit email: ankit-jain-aj@users.noreply.github.com.
