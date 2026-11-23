@@ -1,0 +1,42 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import NotifyForm from '../components/NotifyForm.astro';
+
+const ideas = (await getCollection('upcoming')).sort((a, b) => a.data.order - b.data.order);
+const cards = await Promise.all(ideas.map(async (i) => ({ i, Content: (await render(i)).Content })));
+---
+<Base title="Upcoming" description="What Ankit Jain is writing next.">
+  <section class="wrap narrow page-head">
+    <div class="eyebrow">Upcoming</div>
+    <h1 class="display">On my desk</h1>
+    <p class="lead">I don't stick to one subject. I write about whatever I've spent long enough trying to understand. The next book is taking shape now.</p>
+  </section>
+
+  {cards.length > 0 && (
+    <section class="wrap narrow ideas">
+      {cards.map(({ i, Content }) => (
+        <article class="idea">
+          <div class="cat">{i.data.status}</div>
+          <h2 class="h2">{i.data.title}</h2>
+          <div class="prose"><Content /></div>
+        </article>
+      ))}
+    </section>
+  )}
+
+  <section class="wrap narrow notify-block">
+    <h2 class="h2-display">Be the first to know</h2>
+    <p class="muted">Leave your email and I'll write once, when the next book is out. No newsletter, no spam.</p>
+    <NotifyForm />
+  </section>
+</Base>
+
+<style>
+  .page-head .display { margin: 14px 0 22px; }
+  .ideas { display: grid; gap: 22px; padding-bottom: 20px; }
+  .idea { border: 1px solid var(--rule); background: #fff; padding: 30px 32px; border-radius: 2px; }
+  .idea .h2 { margin: 8px 0 10px; }
+  .notify-block { padding-top: 48px; padding-bottom: 110px; }
+  .notify-block p { margin: 8px 0 22px; }
+</style>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction B · Editorial Bands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Inter:wght@400;500&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#FAF7F2;--ink:#191714;--soft:#6B6358;--rule:#E3DACB;--sand:#EDE4D6;--gold:#C9A54C;--night:#0E0E0E;--ivory:#FFFDF7;--earth:#8C6E4F}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font:400 17px/1.7 Inter,system-ui,sans-serif}
+  a{color:inherit}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+  header{position:sticky;top:0;background:rgba(250,247,242,.92);backdrop-filter:blur(8px);z-index:5;border-bottom:1px solid var(--rule)}
+  header .wrap{display:flex;justify-content:space-between;align-items:center;height:68px}
+  .logo{font:600 21px "Cormorant Garamond",serif;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+  nav{display:flex;gap:30px;font-size:14px;font-weight:500}
+  nav a{text-decoration:none;color:var(--soft)} nav a:hover{color:var(--ink)}
+  /* hero */
+  .hero{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center;padding-top:96px;padding-bottom:104px}
+  .eyebrow{font-size:13px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--earth)}
+  h1{font:300 clamp(44px,6.4vw,84px)/1.02 "Fraunces",serif;letter-spacing:-.02em;margin:18px 0 26px}
+  h1 em{font-style:italic;color:var(--earth)}
+  .hero p{color:var(--soft);font-size:19px;max-width:520px}
+  .hero .links{margin-top:34px;display:flex;gap:24px;font-size:15px;font-weight:500}
+  .hero .links a{text-decoration:none;border-bottom:1.5px solid var(--ink);padding-bottom:2px}
+  .photo{aspect-ratio:4/5;background:var(--sand);border-radius:2px;display:grid;place-items:center;color:var(--soft);font:italic 300 18px "Fraunces"}
+  /* book bands */
+  .band{padding:110px 0}
+  .band .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:72px;align-items:center}
+  .band img{width:100%;max-width:340px;justify-self:center;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+  .band .cat{font-size:12px;font-weight:500;letter-spacing:.24em;text-transform:uppercase}
+  .band h2{font:400 clamp(36px,4.6vw,58px)/1.05 "Fraunces",serif;margin:16px 0 8px;letter-spacing:-.01em}
+  .band .sub{font:italic 300 21px "Fraunces",serif;opacity:.8;margin-bottom:22px}
+  .band p{max-width:520px;opacity:.85}
+  .band .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:13px 24px;font-size:14px;font-weight:500;text-decoration:none;border-radius:2px}
+  .patterns{background:var(--night);color:#EAE0C4}
+  .patterns .cat,.patterns .sub{color:var(--gold)}
+  .patterns .btn.primary{background:var(--gold);color:#111}
+  .patterns .btn.ghost{border:1px solid rgba(201,165,76,.55);color:var(--gold)}
+  .patterns h2{font-family:"Cormorant Garamond",serif;text-transform:uppercase;letter-spacing:.06em;font-weight:500}
+  .wisdom{background:var(--ivory);position:relative;overflow:hidden}
+  .wisdom .wrap{grid-template-columns:1.2fr .8fr}
+  .wisdom .cat{color:var(--earth)}
+  .wisdom .btn.primary{background:var(--ink);color:var(--ivory)}
+  .wisdom .btn.ghost{border:1px solid var(--ink)}
+  .wisdom .art{position:absolute;right:-60px;bottom:-30px;width:520px;opacity:.22;mix-blend-mode:multiply;pointer-events:none}
+  .wisdom h2{font-family:"Cormorant Garamond",serif;text-transform:uppercase;letter-spacing:.06em;font-weight:500}
+  /* desk */
+  .desk{padding:100px 0;border-top:1px solid var(--rule)}
+  .desk .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end}
+  .desk h3{font:300 46px/1.1 "Fraunces",serif}
+  .desk p{color:var(--soft);margin-top:14px}
+  .notify{display:flex;border-bottom:1.5px solid var(--ink)}
+  .notify input{flex:1;min-width:0;border:0;background:transparent;padding:14px 0;font:inherit}
+  .notify button{border:0;background:none;font:500 14px Inter;cursor:pointer;letter-spacing:.06em}
+  footer{border-top:1px solid var(--rule);padding:34px 0;font-size:14px;color:var(--soft)}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer .social{display:flex;gap:22px}
+  footer a{text-decoration:none}
+  @media (max-width:820px){
+    nav{gap:16px} .hero,.band .wrap,.wisdom .wrap,.desk .wrap{grid-template-columns:1fr;gap:40px}
+    .hero{padding-top:56px;padding-bottom:64px} .photo{max-width:320px;aspect-ratio:1} .band{padding:72px 0}
+    .band img{max-width:240px} .wisdom .wrap > :first-child{order:2}
+    .wisdom .art{width:360px;opacity:.15}
+  }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="#">Ankit Jain</a>
+  <nav><a href="#">Books</a><a href="#">Upcoming</a><a href="#">About</a><a href="#">Contact</a></nav>
+</div></header>
+
+<section class="wrap hero">
+  <div>
+    <div class="eyebrow">Author · Consultant · Learner</div>
+    <h1>Making complex things <em>simple.</em></h1>
+    <p>Two decades of solving problems in IT consulting taught me to look for patterns. Now I write about them: in the markets, in the mind, and in everyday life.</p>
+    <div class="links"><a href="#books">See the books</a><a href="#">About me</a></div>
+  </div>
+  <div class="photo">author photo</div>
+</section>
+
+<section class="band patterns" id="books">
+  <div class="wrap">
+    <img src="assets/patterns-cover.png" alt="Patterns in the Noise cover">
+    <div>
+      <div class="cat">Markets</div>
+      <h2>Patterns in the Noise</h2>
+      <div class="sub">Transform noise into opportunity</div>
+      <p>A beginner-friendly guide to ten widely used technical indicators, including RSI, MACD, Bollinger Bands and Supertrend: what each one really tells you, and what it doesn't. Written by a fellow learner, not a market guru.</p>
+      <div class="cta"><a class="btn primary" href="book-patterns.html">Explore the book</a><a class="btn ghost" href="#">Buy on Amazon.in</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="band wisdom">
+  <img class="art" src="assets/wisdom-landscape.png" alt="">
+  <div class="wrap">
+    <div>
+      <div class="cat">Everyday Wisdom · with Rakesh Kumar Jain</div>
+      <h2>The Wisdom of Everyday Life</h2>
+      <div class="sub">Practical principles for peaceful living</div>
+      <p>Timeless ideas from philosophy, psychology and spiritual traditions, told simply and through relatable stories. Eighteen chapters on expectations, acceptance, relationships, money, health and the mind.</p>
+      <div class="cta"><a class="btn primary" href="book-wisdom.html">Explore the book</a><a class="btn ghost" href="#">Buy on Amazon.in</a></div>
+    </div>
+    <img src="assets/wisdom-cover.png" alt="The Wisdom of Everyday Life cover">
+  </div>
+</section>
+
+<section class="desk">
+  <div class="wrap">
+    <div><h3>What's next on my desk</h3><p>A new book is taking shape. I'll email you once when it's out. Nothing else.</p></div>
+    <form class="notify" onsubmit="return false"><input type="email" placeholder="Your email address"><button>NOTIFY ME →</button></form>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <span>© 2026 Ankit Jain · Privacy · Disclaimer</span>
+  <div class="social"><a href="#">YouTube</a><a href="#">Instagram</a><a href="#">Facebook</a></div>
+</div></footer>
+</body>
+</html>

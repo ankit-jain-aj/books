@@ -1,0 +1,88 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import WebForm from '../components/WebForm.astro';
+import { url } from '../lib/utils';
+
+const books = (await getCollection('books')).sort((a, b) => a.data.order - b.data.order);
+const reasons = [
+  { value: 'question', label: 'A question about a book' },
+  { value: 'signed', label: 'Request a signed copy' },
+  { value: 'media', label: 'Media / press' },
+  { value: 'speaking', label: 'Speaking / collaboration' },
+  { value: 'other', label: 'Something else' },
+];
+---
+<Base title="Contact" description="Get in touch with Ankit Jain: reader questions, signed copies, media and speaking.">
+  <section class="wrap contact">
+    <div>
+      <div class="eyebrow">Contact</div>
+      <h1 class="display">Say hello.</h1>
+      <p class="lead">Questions about a book, a signed copy, or anything else. I read every message and usually reply within a few days.</p>
+      <div class="signed-note">
+        <h2>Signed copies</h2>
+        <p class="muted">Choose "Request a signed copy" and tell me which book, how many and your city. I'll reply with the price, shipping and payment details (UPI).</p>
+      </div>
+    </div>
+
+    <WebForm subject="New message from the website" id="contact-form">
+      <div class="field">
+        <label for="reason">What is this about?</label>
+        <select id="reason" name="reason" required>
+          {reasons.map((r) => <option value={r.label} data-key={r.value}>{r.label}</option>)}
+        </select>
+      </div>
+      <div class="row-2">
+        <div class="field"><label for="name">Your name</label><input id="name" name="name" required autocomplete="name" /></div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email" /></div>
+      </div>
+      <div class="field"><label for="phone">Phone / WhatsApp <span class="muted">(optional)</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" /></div>
+
+      <fieldset class="signed" hidden>
+        <div class="row-2">
+          <div class="field">
+            <label for="book">Book</label>
+            <select id="book" name="book">{books.map((b) => <option>{b.data.title}</option>)}<option>Both books</option></select>
+          </div>
+          <div class="field"><label for="copies">Number of copies</label><input id="copies" name="copies" type="number" min="1" value="1" /></div>
+        </div>
+        <div class="field"><label for="city">City and PIN code</label><input id="city" name="city" autocomplete="postal-code" /></div>
+      </fieldset>
+
+      <div class="field"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
+      <p class="muted consent">By sending this form you agree that I may use your details to reply to you. See <a href={url('/privacy')}>privacy</a>.</p>
+      <button type="submit" class="btn primary">Send message</button>
+    </WebForm>
+  </section>
+</Base>
+
+<script>
+  const reason = document.getElementById('reason') as HTMLSelectElement | null;
+  const signed = document.querySelector<HTMLFieldSetElement>('fieldset.signed');
+  const msg = document.getElementById('message') as HTMLTextAreaElement | null;
+  const sync = () => {
+    const key = reason?.selectedOptions[0]?.dataset.key;
+    const isSigned = key === 'signed';
+    if (signed) signed.hidden = !isSigned;
+    signed?.querySelectorAll('input,select').forEach((el) => ((el as HTMLInputElement).required = isSigned));
+    if (msg) { msg.required = !isSigned; msg.placeholder = isSigned ? 'Anything else? e.g. a name for the dedication' : ''; }
+  };
+  const pre = new URLSearchParams(location.search).get('reason');
+  if (pre && reason) {
+    const opt = [...reason.options].find((o) => o.dataset.key === pre);
+    if (opt) reason.value = opt.value;
+  }
+  reason?.addEventListener('change', sync);
+  sync();
+</script>
+
+<style>
+  .contact { display: grid; grid-template-columns: .9fr 1.1fr; gap: 72px; padding-top: 88px; padding-bottom: 100px; align-items: start; }
+  .display { margin: 14px 0 22px; }
+  .signed-note { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--rule); }
+  .signed-note h2 { font: 500 24px var(--f-title); margin-bottom: 6px; }
+  fieldset { border: 0; }
+  .consent { font-size: 13px; margin: -4px 0 20px; }
+  .consent a { color: var(--earth); }
+  @media (max-width: 820px) { .contact { grid-template-columns: 1fr; gap: 40px; padding-top: 48px; padding-bottom: 64px; } }
+</style>

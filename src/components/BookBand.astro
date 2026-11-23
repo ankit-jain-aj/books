@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getEntries } from 'astro:content';
+import Cover from './Cover.astro';
+import { url, image } from '../lib/utils';
+
+interface Props { book: CollectionEntry<'books'>; flip?: boolean }
+const { book, flip = false } = Astro.props;
+const d = book.data;
+const coAuthors = (await getEntries(d.authors.map((id) => ({ collection: 'authors' as const, id }))))
+  .filter((a) => a && !a.data.isMain).map((a) => a.data.name);
+const art = d.art ? image('books', d.art) : null;
+const primaryBuy = d.buy[0];
+---
+<section class={`band t-${d.theme} ${flip ? 'flip' : ''}`}>
+  {art && <img class="art" src={art.src} alt="" aria-hidden="true" loading="lazy" />}
+  <div class="wrap">
+    <a class="cover-link" href={url(`/books/${book.id}`)} aria-label={d.title}>
+      <Cover file={d.cover} alt={`${d.title} book cover`} />
+    </a>
+    <div class="copy">
+      <div class="cat">{d.category}{coAuthors.length > 0 && ` · with ${coAuthors.join(', ')}`}</div>
+      <h2 class="book-title">{d.title}</h2>
+      {d.tagline && <div class="sub">{d.tagline}</div>}
+      <p>{d.hook}</p>
+      <div class="btn-row">
+        <a class="btn primary" href={url(`/books/${book.id}`)}>Explore the book</a>
+        {primaryBuy && <a class="btn" href={primaryBuy.url} target="_blank" rel="noopener">Buy on {primaryBuy.label}</a>}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .band { padding: 110px 0; background: var(--t-bg); color: var(--t-text); position: relative; overflow: hidden; }
+  .band .wrap { position: relative; display: grid; grid-template-columns: .8fr 1.2fr; gap: 72px; align-items: center; }
+  .band.flip .wrap { grid-template-columns: 1.2fr .8fr; }
+  .band.flip .cover-link { order: 2; }
+  .cover-link { justify-self: center; width: 100%; max-width: 340px; }
+  .cover-link :global(img) { width: 100%; box-shadow: 0 30px 60px rgba(0,0,0,.35); transition: transform .35s; }
+  .cover-link:hover :global(img) { transform: translateY(-6px); }
+  .book-title { margin: 16px 0 8px; }
+  .sub { color: var(--t-accent); margin-bottom: 22px; }
+  .t-ivory-ink .sub { color: var(--t-soft); }
+  p { max-width: 520px; color: var(--t-soft); }
+  .btn-row { margin-top: 34px; }
+  .art { position: absolute; right: -60px; bottom: -30px; width: 520px; opacity: .22; mix-blend-mode: multiply; pointer-events: none; }
+  .band.flip .art { right: auto; left: -60px; transform: scaleX(-1); }
+  @media (max-width: 820px) {
+    .band { padding: 72px 0; }
+    .band .wrap, .band.flip .wrap { grid-template-columns: 1fr; gap: 40px; }
+    .band.flip .cover-link { order: 0; }
+    .cover-link { max-width: 230px; }
+    .art { width: 360px; opacity: .15; }
+  }
+</style>

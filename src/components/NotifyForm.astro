@@ -1,0 +1,16 @@
+---
+import WebForm from './WebForm.astro';
+---
+<WebForm subject="Notify me: next book" class="notify" success="Thank you! I'll write once, when the next book is out.">
+  <div class="notify-row">
+    <input type="email" name="email" required placeholder="Your email address" autocomplete="email" aria-label="Your email address" />
+    <button type="submit">NOTIFY ME →</button>
+  </div>
+</WebForm>
+
+<style>
+  .notify-row { display: flex; border-bottom: 1.5px solid var(--t-text); }
+  .notify-row input { flex: 1; min-width: 0; border: 0; background: transparent; padding: 14px 0; font: inherit; color: inherit; }
+  .notify-row input:focus { outline: none; }
+  .notify-row button { border: 0; background: none; font: 500 14px var(--f-body); letter-spacing: .06em; cursor: pointer; color: inherit; white-space: nowrap; padding-left: 12px; }
+</style>

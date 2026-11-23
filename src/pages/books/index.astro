@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Cover from '../../components/Cover.astro';
+import { url } from '../../lib/utils';
+
+const books = (await getCollection('books')).sort((a, b) => a.data.order - b.data.order);
+const categories = [...new Set(books.map((b) => b.data.category))];
+---
+<Base title="Books" description="Books by Ankit Jain: Patterns in the Noise and The Wisdom of Everyday Life.">
+  <section class="wrap page-head">
+    <div class="eyebrow">Books</div>
+    <h1 class="display">The books</h1>
+  </section>
+
+  {categories.map((cat) => (
+    <section class="wrap group">
+      <h2 class="cat">{cat}</h2>
+      <div class="grid">
+        {books.filter((b) => b.data.category === cat).map((b) => (
+          <a class={`item t-${b.data.theme}`} href={url(`/books/${b.id}`)}>
+            <div class="frame"><Cover file={b.data.cover} alt={`${b.data.title} cover`} /></div>
+            <h3>{b.data.title}</h3>
+            <p>{b.data.subtitle}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
+  <div style="height:80px"></div>
+</Base>
+
+<style>
+  .page-head .display { margin-top: 14px; }
+  .group { padding-top: 28px; padding-bottom: 28px; }
+  .group h2 { margin-bottom: 22px; padding-bottom: 12px; border-bottom: 1px solid var(--rule); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 36px; }
+  .item { text-decoration: none; color: var(--ink); }
+  .frame { background: var(--t-bg); padding: 40px 0; display: grid; place-items: center; border: 1px solid var(--t-line); }
+  .frame :global(img) { height: 260px; width: auto; box-shadow: 0 18px 40px rgba(0,0,0,.3); transition: transform .3s; }
+  .item:hover .frame :global(img) { transform: translateY(-5px); }
+  h3 { font: 500 26px/1.2 var(--f-title); margin-top: 18px; }
+  p { font-size: 15px; color: var(--soft); }
+</style>

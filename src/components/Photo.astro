@@ -1,0 +1,11 @@
+---
+import { image } from '../lib/utils';
+interface Props { file: string; alt: string; initials?: string; class?: string; style?: string; eager?: boolean }
+const { file, alt, initials = '', class: cls = '', style, eager = false } = Astro.props;
+const img = image('authors', file);
+---
+<div class={`photo ${cls}`} style={style}>
+  {img
+    ? <img src={img.src} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+    : <span class="initials" aria-label={alt}>{initials}</span>}
+</div>

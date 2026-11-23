@@ -1,0 +1,81 @@
+---
+/**
+ * "Order a signed copy" popup for a book page.
+ * The request is emailed to the owner via Web3Forms; price, payment (UPI) and shipping are arranged offline.
+ */
+import WebForm from './WebForm.astro';
+import { url } from '../lib/utils';
+interface Props { bookTitle: string }
+const { bookTitle } = Astro.props;
+---
+<dialog class="signed-dialog" id="signed-dialog" aria-labelledby="signed-title">
+  <button class="close" type="button" aria-label="Close" data-close>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+
+  <div class="head">
+    <div class="cat">Signed copy</div>
+    <h2 id="signed-title">{bookTitle}</h2>
+    <p class="muted">Fill in your details and I'll get back to you within 2–3 days by WhatsApp or email with the price, shipping cost and UPI payment details. Nothing is charged now.</p>
+  </div>
+
+  <WebForm subject={`Signed copy request: ${bookTitle}`} id="signed-form"
+    success="Thank you! Your request has been received. I'll contact you within 2–3 days with the price and payment details.">
+    <input type="hidden" name="reason" value="Signed copy request" />
+    <input type="hidden" name="book" value={bookTitle} />
+    <div class="row-2">
+      <div class="field"><label for="sc-name">Your name</label><input id="sc-name" name="name" required autocomplete="name" /></div>
+      <div class="field"><label for="sc-copies">Number of copies</label><input id="sc-copies" name="copies" type="number" min="1" max="50" value="1" required /></div>
+    </div>
+    <div class="row-2">
+      <div class="field"><label for="sc-email">Email</label><input id="sc-email" name="email" type="email" required autocomplete="email" /></div>
+      <div class="field"><label for="sc-phone">Phone / WhatsApp</label><input id="sc-phone" name="phone" type="tel" required autocomplete="tel" pattern="[0-9+\-\s]{10,15}" title="10-digit mobile number" /></div>
+    </div>
+    <div class="field"><label for="sc-address">Delivery address</label><textarea id="sc-address" name="address" required rows="3" autocomplete="street-address" placeholder="House / street, area, city"></textarea></div>
+    <div class="row-2">
+      <div class="field"><label for="sc-pin">PIN code</label><input id="sc-pin" name="pin" required inputmode="numeric" pattern="[0-9]{6}" title="6-digit PIN code" autocomplete="postal-code" /></div>
+      <div class="field"><label for="sc-dedication">Sign it for <span class="opt">(optional)</span></label><input id="sc-dedication" name="dedication" placeholder="e.g. To Priya" /></div>
+    </div>
+    <div class="field"><label for="sc-note">Anything else? <span class="opt">(optional)</span></label><input id="sc-note" name="message" /></div>
+    <p class="consent">Your details are used only to arrange this order. See <a href={url('/privacy')}>privacy</a>.</p>
+    <button type="submit" class="btn primary">Send request</button>
+  </WebForm>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('signed-dialog') as HTMLDialogElement | null;
+  const form = document.getElementById('signed-form') as HTMLFormElement | null;
+  document.querySelectorAll('[data-open-signed]').forEach((b) =>
+    b.addEventListener('click', () => {
+      const msg = form?.querySelector('.form-msg');
+      if (msg) { msg.textContent = ''; msg.className = 'form-msg'; }
+      form?.querySelector('button[type="submit"]')?.removeAttribute('hidden');
+      dialog?.showModal();
+    }),
+  );
+  dialog?.querySelector('[data-close]')?.addEventListener('click', () => dialog.close());
+  // close when clicking the dark backdrop
+  dialog?.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+  // after a successful send, hide the button so the thank-you message stands out
+  form?.addEventListener('webform:sent', () => form.querySelector('button[type="submit"]')?.setAttribute('hidden', ''));
+</script>
+
+<style>
+  .signed-dialog {
+    width: min(620px, calc(100vw - 24px)); max-height: calc(100vh - 32px); margin: auto;
+    border: 1px solid var(--t-line); border-radius: 4px; padding: 40px 40px 32px;
+    background: var(--t-bg); color: var(--t-text); text-align: left; position: relative;
+  }
+  .signed-dialog::backdrop { background: rgba(10, 8, 6, .62); backdrop-filter: blur(2px); }
+  .close { position: absolute; top: 14px; right: 14px; background: none; border: 0; color: var(--t-soft); cursor: pointer; padding: 6px; }
+  .close:hover { color: var(--t-text); }
+  .head { margin-bottom: 24px; }
+  .head h2 { font: 500 30px/1.15 var(--f-title); color: var(--t-heading); margin: 8px 0 10px; }
+  .head p { font-size: 15px; line-height: 1.6; }
+  .opt { font-weight: 400; color: var(--t-soft); }
+  .consent { font-size: 13px; color: var(--t-soft); margin: -2px 0 18px; }
+  .consent a { color: var(--t-accent); }
+  .signed-dialog .field { margin-bottom: 14px; }
+  .signed-dialog textarea { min-height: 0; }
+  @media (max-width: 560px) { .signed-dialog { padding: 32px 20px 24px; } .head h2 { font-size: 26px; } }
+</style>

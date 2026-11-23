@@ -1,0 +1,7 @@
+---
+import { image } from '../lib/utils';
+interface Props { file: string; alt: string; class?: string; eager?: boolean }
+const { file, alt, class: cls = '', eager = false } = Astro.props;
+const img = image('books', file);
+---
+{img && <img class={cls} src={img.src} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />}

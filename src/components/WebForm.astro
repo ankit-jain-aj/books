@@ -1,0 +1,55 @@
+---
+/**
+ * Wraps a form that is sent through Web3Forms. Shows a success/error message in place.
+ * If no access key is set in src/data/site.ts the form shows a "not connected yet" note.
+ */
+import { site } from '../data/site';
+interface Props { subject: string; class?: string; id?: string; success?: string }
+const { subject, class: cls = '', id, success } = Astro.props;
+const key = site.web3formsKey;
+---
+<form class={`web-form ${cls}`} id={id} data-ready={key ? 'yes' : 'no'} data-success={success} novalidate>
+  <input type="hidden" name="access_key" value={key} />
+  <input type="hidden" name="subject" value={subject} />
+  <input type="hidden" name="from_name" value={`${site.name} website`} />
+  <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+  <slot />
+  <p class="form-msg" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('form.web-form').forEach((form) => {
+    if (form.dataset.bound) return;
+    form.dataset.bound = '1';
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg = form.querySelector<HTMLElement>('.form-msg')!;
+      msg.className = 'form-msg';
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      if (form.dataset.ready !== 'yes') {
+        msg.textContent = 'This form is not connected yet. Please try again soon.';
+        msg.classList.add('err');
+        return;
+      }
+      const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      if (btn) btn.disabled = true;
+      msg.textContent = 'Sending…';
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form),
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.message);
+        form.reset();
+        form.dispatchEvent(new CustomEvent('webform:sent'));
+        msg.textContent = form.dataset.success || 'Thank you, your message has been sent.';
+        msg.classList.add('ok');
+      } catch {
+        msg.textContent = 'Sorry, something went wrong. Please try again in a moment.';
+        msg.classList.add('err');
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    });
+  });
+</script>

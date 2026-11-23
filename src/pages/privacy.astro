@@ -1,0 +1,20 @@
+---
+import Simple from '../layouts/Simple.astro';
+import { url } from '../lib/utils';
+---
+<Simple title="Privacy" description="How this website handles your information.">
+  <p>This is a simple personal website. I collect as little information as possible.</p>
+  <h2>What is collected</h2>
+  <p>Only what you choose to send through the contact form or the "notify me" form: your name, email and, if you give them, your phone number, message and, for signed-copy orders, your delivery address and PIN code.</p>
+  <h2>How it is used</h2>
+  <ul>
+    <li>To reply to your message or arrange a signed copy you asked for.</li>
+    <li>For "notify me": to send you a single email when a new book is released.</li>
+  </ul>
+  <p>Your details are never sold or shared for marketing. Forms are delivered to my email by Web3Forms, a form-delivery service.</p>
+  <h2>Buying books</h2>
+  <p>"Buy" buttons take you to stores such as Amazon.in and Flipkart. Their own privacy policies apply there.</p>
+  <h2>Your choices</h2>
+  <p>You can ask me at any time to delete your details. Just use the <a href={url('/contact')}>contact form</a>.</p>
+  <p class="muted" style="margin-top:28px;font-size:14px">Last updated: November 2026</p>
+</Simple>

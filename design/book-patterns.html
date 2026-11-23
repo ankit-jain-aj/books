@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patterns in the Noise · Book page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0F0F0F;--panel:#171614;--line:#2C2924;--text:#E9E1CC;--soft:#A79E89;--gold:#C9A54C;--gold-2:#E4C978}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font:400 18px/1.75 "Source Serif 4",Georgia,serif}
+  a{color:inherit}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  header{padding:26px 0;border-bottom:1px solid var(--line)}
+  header .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .logo{font:500 22px "Cormorant Garamond",serif;letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+  nav{display:flex;gap:26px;font-size:15px} nav a{text-decoration:none;color:var(--soft)} nav a:hover{color:var(--gold)}
+  /* hero */
+  .hero{position:relative;overflow:hidden}
+  .hero svg.wave{position:absolute;left:0;right:0;top:50%;width:100%;height:220px;transform:translateY(-50%);opacity:.35;pointer-events:none}
+  .hero .wrap{position:relative;display:grid;grid-template-columns:320px 1fr;gap:64px;align-items:center;padding-top:80px;padding-bottom:88px}
+  .hero img{width:100%;box-shadow:0 30px 70px rgba(0,0,0,.7),0 0 0 1px rgba(201,165,76,.25)}
+  .cat{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+  h1{font:500 clamp(40px,5.6vw,64px)/1.02 "Cormorant Garamond",serif;text-transform:uppercase;letter-spacing:.06em;color:var(--gold-2);margin:14px 0 10px}
+  .subtitle{font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:var(--soft)}
+  .tag{font:italic 400 24px "Cormorant Garamond",serif;margin:22px 0 30px}
+  .buy-label{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft);margin-bottom:12px}
+  .buy{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{padding:12px 22px;font-size:15px;text-decoration:none;border-radius:2px;border:1px solid rgba(201,165,76,.5);color:var(--gold-2)}
+  .btn.primary{background:var(--gold);color:#111;border-color:var(--gold);font-weight:500}
+  /* sections */
+  section.block{padding:84px 0;border-top:1px solid var(--line)}
+  h2{font:500 36px/1.15 "Cormorant Garamond",serif;color:var(--gold-2);margin-bottom:22px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+  .prose p{color:var(--soft)} .prose p+p{margin-top:16px} .prose strong{color:var(--text);font-weight:500}
+  .list{list-style:none} .list li{padding:10px 0 10px 28px;border-bottom:1px solid var(--line);position:relative;color:var(--soft)}
+  .list li::before{content:"";position:absolute;left:4px;top:22px;width:10px;height:1px;background:var(--gold)}
+  .indicators{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:8px}
+  .indicators div{background:var(--bg);padding:22px 16px;text-align:center;font:500 19px/1.25 "Cormorant Garamond",serif}
+  .indicators span{display:block;font:400 12px "Source Serif 4";letter-spacing:.2em;color:var(--gold);margin-bottom:6px}
+  .each{margin-top:26px;color:var(--soft);font-size:16px}
+  .resource{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;background:var(--panel);border:1px solid var(--line);padding:34px 36px;border-radius:2px}
+  .resource h3{font:500 26px "Cormorant Garamond",serif;color:var(--gold-2)}
+  .resource p{color:var(--soft);font-size:16px;margin-top:4px}
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .quote{border-left:1px solid var(--gold);padding:4px 0 4px 22px}
+  .quote p{font:italic 400 21px/1.45 "Cormorant Garamond",serif}
+  .quote cite{display:block;margin-top:12px;font:normal 14px "Source Serif 4";color:var(--soft)}
+  .placeholder{font-size:12px;color:#7d745f;letter-spacing:.06em;margin-top:18px}
+  details{border-bottom:1px solid var(--line);padding:18px 0}
+  summary{cursor:pointer;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+  summary::after{content:"+";color:var(--gold);font-size:22px;line-height:1}
+  details[open] summary::after{content:"–"}
+  details p{color:var(--soft);margin-top:10px;font-size:16px}
+  .author{display:grid;grid-template-columns:120px 1fr;gap:32px;align-items:start}
+  .author .ph{width:120px;height:120px;border-radius:50%;background:var(--panel);border:1px solid var(--line);display:grid;place-items:center;font:500 30px "Cormorant Garamond";color:var(--soft)}
+  .fine{padding:34px 0 50px;border-top:1px solid var(--line);font-size:13px;color:#857c68;text-align:center}
+  .fine p{max-width:720px;margin:0 auto}
+  @media (max-width:760px){
+    .hero .wrap{grid-template-columns:1fr;gap:40px;padding-top:48px;padding-bottom:56px;text-align:center}
+    .hero img{max-width:230px;margin:0 auto} .buy{justify-content:center}
+    .two,.quotes{grid-template-columns:1fr;gap:32px} .indicators{grid-template-columns:repeat(2,1fr)}
+    .resource{grid-template-columns:1fr;padding:28px 24px} section.block{padding:60px 0}
+    .author{grid-template-columns:1fr} nav{gap:16px}
+  }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="index.html">Ankit Jain</a>
+  <nav><a href="#">Books</a><a href="#">Upcoming</a><a href="#">About</a><a href="#">Contact</a></nav>
+</div></header>
+
+<section class="hero">
+  <svg class="wave" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true">
+    <g fill="none" stroke="#C9A54C" stroke-width="1">
+      <path d="M0,120 C200,40 340,190 560,110 S900,30 1200,120"/>
+      <path d="M0,130 C220,60 360,200 580,120 S920,50 1200,128" opacity=".7"/>
+      <path d="M0,112 C180,30 330,170 540,100 S880,20 1200,110" opacity=".5"/>
+      <path d="M0,140 C240,80 380,210 600,130 S940,70 1200,138" opacity=".35"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <img src="assets/patterns-cover.png" alt="Patterns in the Noise book cover">
+    <div>
+      <div class="cat">Markets</div>
+      <h1>Patterns in the Noise</h1>
+      <div class="subtitle">Unveiling market secrets with technical indicators</div>
+      <div class="tag">Transform noise into opportunity.</div>
+      <div class="buy-label">Buy the book</div>
+      <div class="buy"><a class="btn primary" href="#">Amazon.in</a><a class="btn" href="#">Flipkart</a><a class="btn" href="#">Notion Press</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="block"><div class="wrap two">
+  <div class="prose">
+    <h2>About the book</h2>
+    <p>The stock market is full of noise: fast-moving charts, conflicting opinions and endless data. Hidden in that noise are patterns, if you know where to look.</p>
+    <p><strong>Patterns in the Noise</strong> is a beginner-friendly guide to the most widely used technical indicators. It's for anyone new to trading or tired of blindly following tips.</p>
+    <p>No hype. No heavy jargon. Written by a passionate learner, not a market guru.</p>
+  </div>
+  <div>
+    <h2>Inside, you'll discover</h2>
+    <ul class="list">
+      <li>What each indicator really tells you, and what it doesn't</li>
+      <li>How to use indicators on stocks, currency, ETFs, futures and indices, with real chart examples</li>
+      <li>Common beginner mistakes and how to avoid them</li>
+      <li>Easy-to-remember hacks, analogies and setups</li>
+      <li>How to combine indicators to confirm signals and manage risk</li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <h2>The 10 must-know indicators</h2>
+  <div class="indicators">
+    <div><span>01</span>Moving Averages</div><div><span>02</span>RSI</div><div><span>03</span>ADX</div><div><span>04</span>MACD</div><div><span>05</span>Bollinger Bands</div>
+    <div><span>06</span>Supertrend</div><div><span>07</span>ATR</div><div><span>08</span>Stochastic</div><div><span>09</span>Donchian Channels</div><div><span>10</span>Know Sure Thing</div>
+  </div>
+  <p class="each">Each chapter covers: the terminology · calculations · parameters · interpretation · charting · best practices · common mistakes · quick checklist · pro tips · practice.</p>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <div class="resource">
+    <div><h3>Free reader bonus pack</h3><p>Trading journal templates, indicator cheat sheets and coloured sample charts. Free to download.</p></div>
+    <a class="btn primary" href="#">Get the bonus pack</a>
+  </div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <h2>What readers say</h2>
+  <div class="quotes">
+    <div class="quote"><p>"Finally a book that explains what RSI actually measures, instead of just telling you when to buy."</p><cite>— Reader name, city</cite></div>
+    <div class="quote"><p>"Simple, honest and practical. The common-mistakes sections alone were worth it."</p><cite>— Reader name, city</cite></div>
+    <div class="quote"><p>"Reads like a friend who has done the homework for you."</p><cite>— Reader name, city</cite></div>
+  </div>
+  <p class="placeholder">PLACEHOLDER QUOTES. Real reviews go here.</p>
+</div></section>
+
+<section class="block"><div class="wrap two">
+  <div>
+    <h2>Reader questions</h2>
+    <details open><summary>Is this book for complete beginners?</summary><p>Yes. Every indicator starts from the basics, with analogies and charts, before moving on to how to use it.</p></details>
+    <details><summary>Does the book give stock tips?</summary><p>No. It teaches you to read and question the indicators yourself. It's educational, not investment advice.</p></details>
+    <details><summary>Where do I find the bonus pack?</summary><p>Scan the QR code in the book, or use the link above.</p></details>
+    <p class="placeholder" style="margin-top:20px">Have a question? <a href="#">Ask it here</a> and the best ones get added.</p>
+  </div>
+  <div>
+    <h2>About the author</h2>
+    <div class="author">
+      <div class="ph">AJ</div>
+      <div class="prose"><p>Ankit Jain is a curious learner, market enthusiast and personal finance explorer, with over two decades of experience in IT consulting. This book grew out of years of self-study: an attempt to decode the logic behind the charts and separate signal from noise.</p><p><a href="#" style="color:var(--gold)">More about Ankit →</a></p></div>
+    </div>
+  </div>
+</div></section>
+
+<div class="fine"><p>This book and website are for education only and are not investment advice. The author is not a SEBI-registered investment adviser. Trading involves risk; please do your own research or consult a registered adviser.</p></div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Wisdom of Everyday Life · Book page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#FBF8F2;--card:#FFFEFA;--ink:#1E1A16;--soft:#655B4F;--line:#E4DACA;--earth:#8C6E4F;--blush:#EDE1D3}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font:400 18px/1.75 "Source Serif 4",Georgia,serif}
+  a{color:inherit}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  header{padding:26px 0;border-bottom:1px solid var(--line)}
+  header .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .logo{font:500 22px "Cormorant Garamond",serif;letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+  nav{display:flex;gap:26px;font-size:15px} nav a{text-decoration:none;color:var(--soft)} nav a:hover{color:var(--earth)}
+  /* hero */
+  .hero{position:relative;overflow:hidden}
+  .hero .art{position:absolute;right:-40px;bottom:-10px;width:640px;opacity:.3;mix-blend-mode:multiply;pointer-events:none}
+  .hero .wrap{position:relative;display:grid;grid-template-columns:320px 1fr;gap:64px;align-items:center;padding-top:80px;padding-bottom:88px}
+  .hero img.cover{width:100%;box-shadow:0 26px 60px rgba(60,40,20,.25)}
+  .cat{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--earth)}
+  h1{font:500 clamp(38px,5.4vw,60px)/1.05 "Cormorant Garamond",serif;text-transform:uppercase;letter-spacing:.06em;margin:14px 0 10px}
+  .subtitle{font:italic 400 24px "Cormorant Garamond",serif;color:var(--soft)}
+  .by{font-size:14px;letter-spacing:.24em;text-transform:uppercase;margin:22px 0 30px;color:var(--soft)}
+  .buy-label{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft);margin-bottom:12px}
+  .buy{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{padding:12px 22px;font-size:15px;text-decoration:none;border-radius:2px;border:1px solid var(--ink);background:rgba(255,255,255,.6)}
+  .btn.primary{background:var(--ink);color:var(--card)}
+  /* sections */
+  section.block{padding:84px 0;border-top:1px solid var(--line)}
+  h2{font:500 36px/1.15 "Cormorant Garamond",serif;margin-bottom:22px}
+  .center{text-align:center}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+  .prose p{color:var(--soft)} .prose p+p{margin-top:16px}
+  .list{list-style:none} .list li{padding:10px 0 10px 28px;border-bottom:1px solid var(--line);position:relative;color:var(--soft)}
+  .list li::before{content:"·";position:absolute;left:8px;top:6px;color:var(--earth);font-size:28px}
+  .pull{font:italic 400 clamp(26px,3.4vw,36px)/1.35 "Cormorant Garamond",serif;max-width:720px;margin:0 auto;text-align:center}
+  .orn{display:flex;align-items:center;justify-content:center;gap:12px;margin:22px auto}
+  .orn::before,.orn::after{content:"";width:60px;height:1px;background:var(--soft)} .orn i{width:5px;height:5px;border-radius:50%;background:var(--soft)}
+  .rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-top:40px;text-align:left}
+  .rule{background:var(--card);border:1px solid var(--line);padding:24px 22px;border-radius:2px}
+  .rule .n{font:600 30px/1 "Cormorant Garamond",serif;color:var(--earth)}
+  .rule h3{font:500 15px/1.35 "Source Serif 4";letter-spacing:.06em;text-transform:uppercase;margin:12px 0 6px}
+  .rule p{font-size:15px;color:var(--soft);line-height:1.55}
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .quote{border-left:1px solid var(--earth);padding:4px 0 4px 22px}
+  .quote p{font:italic 400 21px/1.45 "Cormorant Garamond",serif}
+  .quote cite{display:block;margin-top:12px;font:normal 14px "Source Serif 4";color:var(--soft)}
+  .placeholder{font-size:12px;color:#a0937f;letter-spacing:.06em;margin-top:18px}
+  details{border-bottom:1px solid var(--line);padding:18px 0}
+  summary{cursor:pointer;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+  summary::after{content:"+";color:var(--earth);font-size:22px;line-height:1} details[open] summary::after{content:"–"}
+  details p{color:var(--soft);margin-top:10px;font-size:16px}
+  .authors{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+  .author .ph{width:110px;height:110px;border-radius:50%;background:var(--blush);display:grid;place-items:center;font:500 28px "Cormorant Garamond";color:var(--soft);margin-bottom:18px}
+  .author h3{font:600 26px "Cormorant Garamond",serif}
+  .author .role{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--earth);margin-bottom:10px}
+  .fine{padding:34px 0 50px;border-top:1px solid var(--line);font-size:13px;color:#958a78;text-align:center}
+  @media (max-width:760px){
+    .hero .wrap{grid-template-columns:1fr;gap:40px;padding-top:48px;padding-bottom:56px;text-align:center}
+    .hero img.cover{max-width:230px;margin:0 auto} .buy{justify-content:center} .hero .art{width:420px;opacity:.18}
+    .two,.quotes,.authors{grid-template-columns:1fr;gap:32px} section.block{padding:60px 0} nav{gap:16px}
+  }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="index.html">Ankit Jain</a>
+  <nav><a href="#">Books</a><a href="#">Upcoming</a><a href="#">About</a><a href="#">Contact</a></nav>
+</div></header>
+
+<section class="hero">
+  <img class="art" src="assets/wisdom-landscape.png" alt="">
+  <div class="wrap">
+    <img class="cover" src="assets/wisdom-cover.png" alt="The Wisdom of Everyday Life book cover">
+    <div>
+      <div class="cat">Everyday Wisdom</div>
+      <h1>The Wisdom of Everyday Life</h1>
+      <div class="subtitle">Practical principles for peaceful living</div>
+      <div class="by">Rakesh Kumar Jain · Ankit Jain</div>
+      <div class="buy-label">Buy the book</div>
+      <div class="buy"><a class="btn primary" href="#">Amazon.in</a><a class="btn" href="#">Flipkart</a><a class="btn" href="#">Wissen Bookstore</a><a class="btn" href="#">Google Play (eBook)</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="block"><div class="wrap two">
+  <div class="prose">
+    <h2>About the book</h2>
+    <p>Life is beautiful, yet often filled with unnecessary suffering. Most of our pain comes not from life itself, but from the way we think, expect, react and hold on.</p>
+    <p>Drawing from ancient wisdom, philosophy, psychology and everyday experience, this book explores how our thoughts, emotions, expectations, relationships, finances, health and daily choices shape the quality of our lives. It is written in simple language, with relatable stories.</p>
+  </div>
+  <div>
+    <h2>In this book, you will discover</h2>
+    <ul class="list">
+      <li>How expectations create suffering, and how to let them go</li>
+      <li>Why acceptance is the doorway to peace</li>
+      <li>How thoughts, emotions and beliefs shape your reality</li>
+      <li>The secrets of healthy relationships and meaningful living</li>
+      <li>Practical ways to live wisely in a complex world</li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <p class="pull">"Peace is not something you find outside. It is something you create within."</p>
+  <div class="orn"><i></i></div>
+</div></section>
+
+<section class="block center"><div class="wrap">
+  <h2>The 13 Golden Rules</h2>
+  <p class="prose" style="color:var(--soft);max-width:560px;margin:0 auto">Simple principles from the book to come back to, one day at a time.</p>
+  <div class="rules">
+    <div class="rule"><div class="n">1</div><h3>Maintain realistic expectations</h3><p>Do your best. Hold outcomes with open hands.</p></div>
+    <div class="rule"><div class="n">2</div><h3>Accept what you cannot control</h3><p>Accept reality. Focus on what you can change.</p></div>
+    <div class="rule"><div class="n">3</div><h3>Avoid comparison</h3><p>Measure your progress against yourself.</p></div>
+    <div class="rule"><div class="n">4</div><h3>Think before judging others</h3><p>You see a moment, not the whole story.</p></div>
+    <div class="rule"><div class="n">5</div><h3>Manage anger</h3><p>Understand the expectation behind anger.</p></div>
+    <div class="rule"><div class="n">6</div><h3>Avoid labelling people</h3><p>People can change. Avoid quick labels.</p></div>
+    <div class="rule"><div class="n">7</div><h3>Be present</h3><p>The present moment is the only moment.</p></div>
+    <div class="rule"><div class="n">8</div><h3>Be aware of the mind's interpretations</h3><p>Notice your interpretation. Check its accuracy.</p></div>
+    <div class="rule"><div class="n">9</div><h3>Learn from repeated mistakes</h3><p>Find the pattern. Choose a better response.</p></div>
+    <div class="rule"><div class="n">10</div><h3>Resolve conflicts quickly</h3><p>Speak sooner. Silence often worsens things.</p></div>
+    <div class="rule"><div class="n">11</div><h3>Help others with compassion</h3><p>Give what you can. Release the outcome.</p></div>
+    <div class="rule"><div class="n">12</div><h3>Practise financial discipline</h3><p>Live within means. Save and prepare for needs.</p></div>
+    <div class="rule"><div class="n">13</div><h3>Care for your physical health</h3><p>Move, eat well, rest, and keep balance.</p></div>
+  </div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <h2>What readers say</h2>
+  <div class="quotes">
+    <div class="quote"><p>"A book to keep by the bedside and return to, a chapter at a time."</p><cite>— Reader name, city</cite></div>
+    <div class="quote"><p>"Gentle, clear and deeply practical. I gifted copies to my parents."</p><cite>— Reader name, city</cite></div>
+    <div class="quote"><p>"Two generations, one calm voice."</p><cite>— Reader name, city</cite></div>
+  </div>
+  <p class="placeholder">PLACEHOLDER QUOTES. Real reviews go here.</p>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <h2>The authors</h2>
+  <div class="authors">
+    <div class="author"><div class="ph">RKJ</div><h3>Rakesh Kumar Jain</h3><div class="role">Co-author</div>
+      <p class="prose" style="color:var(--soft)">A lifelong student of practical wisdom, meditation and self-understanding. An Electrical Engineering graduate of the University of Roorkee (now IIT Roorkee), he served with the Central Electricity Authority and the Indian Railway Service of Electrical Engineers, retiring in 2014 as a Senior Administrative Grade Officer. Since then he has devoted himself to reflection and to the principles of a peaceful, meaningful life.</p></div>
+    <div class="author"><div class="ph">AJ</div><h3>Ankit Jain</h3><div class="role">Co-author</div>
+      <p class="prose" style="color:var(--soft)">A consultant, author and analytical thinker who enjoys simplifying complex ideas. He believes timeless wisdom becomes truly valuable only when it is communicated clearly and put into practice. <a href="#" style="color:var(--earth)">More about Ankit →</a></p></div>
+  </div>
+</div></section>
+
+<section class="block"><div class="wrap" style="max-width:760px">
+  <h2>Reader questions</h2>
+  <details open><summary>Do I need to read it from start to finish?</summary><p>No. Each chapter stands on its own; many readers reflect on one chapter at a time.</p></details>
+  <details><summary>Is there an eBook?</summary><p>Yes, on Google Play Books.</p></details>
+  <p class="placeholder" style="margin-top:20px">Have a question? <a href="#">Ask it here</a>.</p>
+</div></section>
+
+<div class="fine">This book shares general life principles and is not a substitute for medical, psychological or professional advice.</div>
+</body>
+</html>
