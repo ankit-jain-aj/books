@@ -22,6 +22,7 @@ Static Astro 5 site, deployed to GitHub Pages via `.github/workflows/deploy.yml`
 - Run: `npm run dev` (port 4321), `npm run build`.
 
 ## Publishing
-- Repo: github.com/ankit-jain-aj/books (public). Live: https://ankit-jain-aj.github.io/books/
+- Repo: github.com/ankit-jain-aj/books (public). Live: https://books.ankit-jain.in (custom domain set in repo Settings → Pages; DNS: CNAME `books` → `ankit-jain-aj.github.io` at Hostinger). Old github.io/books URL redirects there.
+- `ankit-jain.in` (root) is reserved for a future hub page; other subdomains (tools., coaching.) for separate sites.
 - Every push to `main` rebuilds and publishes via GitHub Actions (~2 min). The workflow reads the address/base path from Pages settings, so a repo rename or custom domain needs no code change.
 - Ask the owner before committing/pushing (pushing publishes). Commit email: ankit-jain-aj@users.noreply.github.com.
