@@ -17,7 +17,7 @@ buy:
 # This book's social accounts: a handle (e.g. "@mychannel") or a full link. Empty "" = hidden.
 social:
   - { label: YouTube, url: "@TheWisdomofEverydayLife_book" }
-  - { label: Instagram, url: "ankitjain.author" }
+  - { label: Instagram, url: "thewisdomofeverydaylife.book" }
   - { label: Facebook, url: "" }
 discover:
   title: In this book, you will discover

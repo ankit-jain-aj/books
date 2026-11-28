@@ -14,8 +14,8 @@ buy:
   - { label: Notion Press, url: "https://notionpress.com/in/read/patterns-in-the-noise" }
 # This book's social accounts: a handle (e.g. "@mychannel") or a full link. Empty "" = hidden.
 social:
-  - { label: YouTube, url: "@patternsinthenoise_book" }
-  - { label: Instagram, url: "ankitjain.author" }
+  - { label: YouTube, url: "@PatternsInTheNoise_book" }
+  - { label: Instagram, url: "patternsinthenoise.book" }
   - { label: Facebook, url: "" }
 discover:
   title: Inside, you'll discover

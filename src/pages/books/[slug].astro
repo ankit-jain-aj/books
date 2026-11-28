@@ -4,7 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Cover from '../../components/Cover.astro';
 import Photo from '../../components/Photo.astro';
 import SignedCopyDialog from '../../components/SignedCopyDialog.astro';
-import { url, image, socialLinks } from '../../lib/utils';
+import { url, image, socialLinks, publicFileExists } from '../../lib/utils';
 
 export async function getStaticPaths() {
   const books = await getCollection('books');
@@ -33,7 +33,7 @@ const jsonLd = {
   offers: d.buy.map((b) => ({ '@type': 'Offer', url: b.url, availability: 'https://schema.org/InStock' })),
 };
 ---
-<Base title={d.title} description={`${d.title}: ${d.subtitle}. ${d.hook}`} theme={d.theme} ogImage={`/images/books/${d.cover}`} jsonLd={jsonLd}>
+<Base title={d.title} description={`${d.title}: ${d.subtitle}. ${d.hook}`} theme={d.theme} ogImage={publicFileExists(`images/share/${book.id}.jpg`) ? `/images/share/${book.id}.jpg` : `/images/books/${d.cover}`} jsonLd={jsonLd}>
   <section class="hero">
     {isNoir && (
       <svg class="wave" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true">
